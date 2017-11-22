@@ -8,19 +8,26 @@ import javax.swing.JLabel;
 import riverraid.ImageLoader;
 import static riverraid.ImageLoader.*;
 
+/**CRECION DE LOS BORDES DEL RIO*/
 
 public class Bordes extends JLabel{
   public int x,y,h,w,n;
   public ImageIcon icon;
-  private JLabel puente1,puente2;
-    Bordes() { 
+    
+  /////////////////CONSTRUCTOR POR DEFECTO
+  Bordes() { 
+      
     } 
+    
+    /**CONSTRUCTOR PARAMETRICO RECIBE CORDENADAS Y NUMERO RESPECTIVO DEL*/
+    /**TIPO DE BORDE (O MONTAÑA CAGADA EN LAS IMAGENES)*/
    Bordes(int x, int y,int n) {
       
         this.x = x;
         this.y = y;
         this.n = n;
-          
+        
+        ////////////////SE CREA LA MONTAÑA
         Crear();
     } 
 
@@ -30,6 +37,9 @@ public class Bordes extends JLabel{
       ImageIcon icon; 
      
       
+      
+      /**DEPENDIENDO DEL VALOR DE N EL JLABEL VA A CARGAR UNA IMAGEN DIFERENTE DE MONTAÑA(O PARED)*/
+      /**Y LA UBICARA EN LAS CORDENADAS RECIBIDAS*/
       if(n==1){
       
       icon=loader.getImagen(ImageLoader.pd1);
@@ -110,7 +120,8 @@ public class Bordes extends JLabel{
   }
      
     
-  
+  /**SEA CUAL SEA LA IMAGEN QUE SE CARGUE EN LA PARED, SE LE AGREGAN LAS RESPECTIVAS
+     MEDIDAS A SU RECTANGULO*/
   
     public Rectangle getRectanguloAvion(){
         return getBounds();

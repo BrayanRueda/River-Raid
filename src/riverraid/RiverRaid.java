@@ -1,7 +1,7 @@
 
 package riverraid;
 
-
+/**CLASE PRINCIPAL QUE EJECUTA TODO EL JUEGO*/
 public class RiverRaid {
 
     

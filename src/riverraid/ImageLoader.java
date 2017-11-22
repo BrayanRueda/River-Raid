@@ -2,8 +2,9 @@ package riverraid;
 
 import java.net.URL;
 import javax.swing.ImageIcon;
+/**CLASE QUE CARGA TODAS LAS IMAGENES A SER MOSTRADAS EN EL JUEGO*/
 
-
+/**CADA VALOR REPRESENTA UNA IMAGEN EN ESPECIFICA QUE VA A SER CARGADA EN EL VECTOR*/
 public class ImageLoader {
      private static ImageLoader instance=null;
     
@@ -51,6 +52,7 @@ public class ImageLoader {
      
      
      private ImageIcon images[];
+     
      /** constructor de la clase en la cual se guardan las URL de las imagenes */
      private ImageLoader() {
      
@@ -58,7 +60,8 @@ public class ImageLoader {
         "barco.png","barco1.png","misil.png","G1.png","G2.png","G3.png","G4.png","G5.png","G6.png","G7.png","heplicotero.png","heplicotero2.png","exp1.png",
         "exp2.png","exp3.png","exp4.png","exp5.png","exp6.png","pd1.png","pd2.png","pd3.png","pi1.png","pi2.png","pi3.png","p1.png","p2.png",
         "pi4.png","pd4.png","logo.png"};
-
+        
+        /**LLENA EL VECTOR CON LAS RUTAS DE LAS IMAGENES PARA MOSTRARLAS*/
         images = new ImageIcon[TOTAL_IMAGES];
         for(int i=0;i<TOTAL_IMAGES;i++){
             URL url = this.getClass().getResource("image/"+nombres[i]);
@@ -66,7 +69,7 @@ public class ImageLoader {
         }
     }
      
-     /** para que halla solo 1 instancia  */
+     /** para que haya solo 1 instancia  */
      public static ImageLoader getInstance(){
          if(instance==null)
           instance = new ImageLoader();

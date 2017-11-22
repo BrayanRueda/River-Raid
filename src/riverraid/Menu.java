@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 /**
- *
+ *DESDE AQUI SE CONTROLA EL JUEGO
  * @author CHIRLY
  */
 public class Menu {
@@ -23,11 +23,14 @@ public class Menu {
     MotorJuego obj= new MotorJuego();
     public  static SonidoIntro sound= new SonidoIntro();
     
-    public Menu(){
+    public Menu(){/**CONTRUCTOR POR DEFECTO*/
         
     }
     
+    /**se relizan las opciones del menu*/
     public void Jugar(){
+        
+        /**se crea la ventana principal del juego y sus opciones*/
         frame= new JFrame("River Rider 1.0");
         Container container= frame.getContentPane();
         container.setLayout(null);
@@ -56,6 +59,7 @@ public class Menu {
         salir.setBounds(275, 500, 150, 30);
         fondo.add(salir);
                 
+        /**ACCIONES A REALIZAR SI EL USUARIO PRESIONA LA OPCION JUGAR*/
         jugar.addMouseListener(new MouseAdapter(){
             public void mouseEntered(MouseEvent e){
                 jugar.setIcon(new ImageIcon(getClass().getResource("image/jugar2.png")));
@@ -64,7 +68,8 @@ public class Menu {
                 jugar.setIcon(new ImageIcon(getClass().getResource("image/jugar.png")));
             }
             public void mousePressed(MouseEvent e){
-                                
+                
+                /**SE CREA UNA VENTANA DONDE SE INGRESA NOMBRE DE USUARIO*/
                 nombre= new JFrame("");
                 Container container1= nombre.getContentPane();
                 container1.setLayout(null);
@@ -89,6 +94,8 @@ public class Menu {
                 
                 jugador.addActionListener(new ActionListener(){
                     public void actionPerformed( ActionEvent event ){
+                        
+                        /**se valida que el nombre de jugador no sea mayor a 8 caracteres ni menor a 4*/
                         if(jugador.getText().length()<4){
                            JOptionPane.showMessageDialog(null, "El nombre debe ser mayor a 4 caracteres","Error",JOptionPane.ERROR_MESSAGE);
                         }
@@ -96,6 +103,8 @@ public class Menu {
                            JOptionPane.showMessageDialog(null, "El nombre debe ser menor a 8 caracteres","Error",JOptionPane.ERROR_MESSAGE);
                         }
                         else{
+                            
+                            /**EL JUEGO INICIA*/
                             nomJug= jugador.getText();
                             nombre.setVisible(false);
                             frame.setVisible(false);
@@ -107,14 +116,18 @@ public class Menu {
                     }
                 });
                 
+                /**PARAMETROS DE LA VENTANA DONDE SE INGRESA EL NOMBRE*/
                 nombre.setBounds(0, 0, 300, 150);
+                Image icon = new ImageIcon(getClass().getResource("image/logo.png")).getImage();
+                nombre.setIconImage(icon);
                 nombre.setLocationRelativeTo(null);
                 nombre.setVisible(true);
                 nombre.setResizable(false);
             }
-        } );
+        } );/**ACCIONES DE JUGAR*/
         
-        instruc.addMouseListener(new MouseAdapter(){
+
+        instruc.addMouseListener(new MouseAdapter(){/**ACCIONES A REALIZAR SI EL USUARIO PRESIONA LA OPCION INSTRUCCIONES*/
             public void mouseEntered(MouseEvent e){
                 instruc.setIcon(new ImageIcon(getClass().getResource("image/instrucciones2.png")));
             }
@@ -194,6 +207,7 @@ public class Menu {
                 info4.setBounds(321, 590, 100, 50);
                 fondo1.add(info4);
                 
+               /**SI EL USUARIO PRECIONA LA OPCION MENU DENTRO DE LA VENTANA DE INSTRUCCIONES SE VUELVE A MOSTRAR EL MENU PRINCIPAL*/
                 regresar.addMouseListener(new MouseAdapter(){
                     public void mouseEntered(MouseEvent e){
                         regresar.setIcon(new ImageIcon(getClass().getResource("image/menu2.png")));
@@ -205,17 +219,21 @@ public class Menu {
                         frame1.setVisible(false);
                         frame.setVisible(true);   
                     }
-                } );
-                  
+                } );///ACCIONES PARA REGRESAR AL MENU PRINCIPAL
+            
+            /**PARAMETROS DE LA VENTANA INSTRUCCIONES*/
             frame1.setBounds(350, 100, 700, 700);
+            Image icon = new ImageIcon(getClass().getResource("image/logo.png")).getImage();
+            frame1.setIconImage(icon);
             frame1.setVisible(true);
             frame.setVisible(false);
             frame1.setResizable(false);
             frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             }
-        } );
+        } );//ACCIONES DE INSTRUCCCION
         
-        punt.addMouseListener(new MouseAdapter(){
+        punt.addMouseListener(new MouseAdapter(){/**ACCIONES A REALIZAR SI EL USUARIO PRESIONA LA OPCION PUNTUACION*/
+
             public void mouseEntered(MouseEvent e){
                 punt.setIcon(new ImageIcon(getClass().getResource("image/puntuaciones2.png")));
             }
@@ -225,8 +243,7 @@ public class Menu {
             
             public void mousePressed(MouseEvent e){
                                               
-                ////////////////////////////////////////////////////////////////MANEJO DE PUNTAJES
-                
+                /**MANEJO DE PUNTAJES*/
                 int cont=0;
                 String arch= "puntuaciones.txt";
                 FileReader fr;
@@ -263,11 +280,9 @@ public class Menu {
                         
                         linea= br.readLine();
                     }
-                    br.close();
-                    
-                   //////////////// 
+                    br.close(); 
                    
-                    
+                    /**SE ACOMODAN LOS PUNTAJES CON SU RESPECTIVO USUARIO DE MAYOR A MENOR*/
                     for(int j=0;j<cont;j++){
                         for(int i=0;i<cont;i++){
                         String aux;
@@ -293,7 +308,7 @@ public class Menu {
                     Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
-                ////////////////////////////////////////////////////////////////MENU DE PUNTUACIONES
+                /**MENU DE PUNTUACIONES*/
                 frame2= new JFrame("River Raid 1.0");
                 JLabel fondo1,puntajes[],etiqueta;
                 puntajes= new JLabel[10];
@@ -310,6 +325,7 @@ public class Menu {
                 etiqueta.setBounds(170, 225, 500, 36);
                 fondo1.add(etiqueta);
                 
+                //////////////////////////SE AGREGAN LOS PUNTAJES AL MENU
                 int punty=275;
                 for(int i=0;i<puntajes.length;i++){
                     puntajes[i]= new JLabel(usuario[i]);
@@ -320,10 +336,12 @@ public class Menu {
                     punty+=30;
                 }
                 
+                
                 regresar= new JLabel(new ImageIcon(getClass().getResource("image/menu.png")));
                 regresar.setBounds(520, 590, 150,30);
                 fondo1.add(regresar);
                 
+                /**SI EL USUARIO PRECIONA LA OPCION MENU DENTRO DE LA VENTANA DE PUNTUACIONES VUELVE A MOSTRAR EL MENU PRINCIPAL*/
                 regresar.addMouseListener(new MouseAdapter(){
                     public void mouseEntered(MouseEvent e){
                         regresar.setIcon(new ImageIcon(getClass().getResource("image/menu2.png")));
@@ -337,8 +355,11 @@ public class Menu {
 
                     }
                 } );
-                         
+            
+            /**SE CREA UN FRAME QUE MIUESTRE LAS PUNTUACIONES Y SE OCULTA EL MENU PRINCIPAL MOMENTANEAMENTE*/
             frame2.setBounds(350, 100, 700, 700);
+            Image icon = new ImageIcon(getClass().getResource("image/logo.png")).getImage();
+            frame2.setIconImage(icon);
             frame2.setVisible(true);
             frame.setVisible(false);
             frame2.setResizable(false);
@@ -347,6 +368,8 @@ public class Menu {
             }
         } );
         
+        
+        /**ACCIONES SI EL USUARIO PRESIONA LA OPCION CREDITOS*/
         credi.addMouseListener(new MouseAdapter(){
             public void mouseEntered(MouseEvent e){
                 credi.setIcon(new ImageIcon(getClass().getResource("image/creditos2.png")));
@@ -358,6 +381,7 @@ public class Menu {
                 frame3= new JFrame("River Raid 1.0");
                 JLabel fondo1,titulo,autores,nombre1,nombre2,prof,nombre3;
                 
+                //SE CREA UNA VENTANA QUE MUESTRA LA INFORMACION DE LOS AUTORES
                 Container container1=frame3.getContentPane();
                 container1.setLayout(null);
                                                  
@@ -405,7 +429,7 @@ public class Menu {
                 nombre3.setBounds(268, 455, 200, 30);
                 fondo1.add(nombre3);
                 
-                
+                /**SI EL USUARIO PRECIONA LA OPCION MENU DENTRO DE LA VENTANA DE CREDITOS VUELVE A MOSTRAR EL MENU PRINCIPAL*/
                 regresar.addMouseListener(new MouseAdapter(){
                     public void mouseEntered(MouseEvent e){
                         regresar.setIcon(new ImageIcon(getClass().getResource("image/menu2.png")));
@@ -418,16 +442,21 @@ public class Menu {
                         frame.setVisible(true);
 
                     }
-                } );
+                } );///ACCIONES PARA REGRESAR AL MENU PRINCIPAL
                 
+                
+                /**PARAMETROS DE LA VENTANA CREDITOS*/
                 frame3.setBounds(350, 100, 700, 700);
+                Image icon = new ImageIcon(getClass().getResource("image/logo.png")).getImage();
+                frame3.setIconImage(icon);
                 frame3.setVisible(true);
                 frame.setVisible(false);
                 frame3.setResizable(false);
                 frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             }
-        } );
+        } );///ACCIONES DE VENTANA CREDITOS
         
+        /**EL JUEGO SE CIERRA POR COMPLETO*/
         salir.addMouseListener(new MouseAdapter(){
             public void mouseEntered(MouseEvent e){
                 salir.setIcon(new ImageIcon(getClass().getResource("image/salir2.png")));
@@ -438,10 +467,12 @@ public class Menu {
             public void mousePressed(MouseEvent e){
                 System.exit(0);
             }
-        } );
+        } );///////
         
+        /**TAMAÑO Y SONIDO DE LA VENTANA PRINCIPAL*/
         sound.PlaySonido();
-        
+        Image icon = new ImageIcon(getClass().getResource("image/logo.png")).getImage();
+        frame.setIconImage(icon);
         frame.setBounds(350, 100, 700, 700);
         frame.setVisible(true);
         frame.setResizable(false);

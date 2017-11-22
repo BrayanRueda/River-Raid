@@ -25,16 +25,16 @@ import javax.swing.Timer;
 import riverraid.EscenarioJuego.Fondo;
 import sun.swing.plaf.synth.SynthIcon;
 import sun.tools.jar.resources.jar;
-/** clase donde se inicia el tiempo y los movimientos de los obj */
+/** CLASE DONDE SE INICIA EL TIEMPO Y LOS MOVIMIENTOS DE LOS OBJETOS ASI COMO LAS COLICIONES*/
 public class MotorJuego extends EscenarioJuego{
     private JLabel vida,puntaje,gasolina;
     private JLabel gas,exp,tiempo,etiqueta;
     public JLabel[] ma;
      public Avion av;
      public Fondo fn;
-     public enemigos[] ene;
+     public Enemigos[] ene;
      public Bordes[] bor;
-     public puente[] puentes;
+     public Puente[] puentes;
      int ff=5,con=0,z=0;
      int G,vidas,min=0,seg=0,t=0,t_sa=0,seg_sa=0;
      int contT,contS,conM,banV=0,expp=0,banexp, nn[], Dir=-1,banB,rany=0,rb[],posYa=100,posYb=100,py=-1760;;
@@ -83,13 +83,13 @@ public class MotorJuego extends EscenarioJuego{
         etiqueta.setForeground(Color.YELLOW);
         etiqueta.setFont(new Font("Tahoma",Font.BOLD,22));
     }
-    
+    /**se recibe el nombre que el usuario ingresa*/
     public void setNom(String nom){
         this.nombre= nom;
     }
     
     /**metodo donde se reciben los obj(avion,enemigo, etc) */
-    public void iniciar(Avion a,Fondo f,JLabel[] m,enemigos[] e,Bordes[] b,puente[] p,Frame frame,EscenarioJuego ejj){
+    public void iniciar(Avion a,Fondo f,JLabel[] m,Enemigos[] e,Bordes[] b,Puente[] p,Frame frame,EscenarioJuego ejj){
     timerJuego =new Timer(80,new TimerJuego());
     timerJuego.start();
     menu=frame;  menu.setVisible(false);
@@ -148,7 +148,7 @@ public class MotorJuego extends EscenarioJuego{
     /**clase Timer implementa el action Listener  */
     class TimerJuego implements ActionListener{
         public void actionPerformed(ActionEvent e) {
-            t_sa++;           
+            t_sa++;/**contador para el momento en que el sonido del avion acabe*/        
             
             if(band_s==0){
                 band_s=1;
@@ -161,10 +161,12 @@ public class MotorJuego extends EscenarioJuego{
                 band_s=0;
             }            
             
-            EscenarioJuego es=new EscenarioJuego();
-            boolean a;
+            EscenarioJuego es=new EscenarioJuego();/**se crea instancia de EscenarioJuego*/
+            
+            boolean a;/**variable para validar las cliciones*/
             banV=0;
-            // colicion con puentes
+            
+            /*colicion con puentes*/
             for (int  i = 0;  i < puentes.length;  i+=2) {
                 
                 if(i<puentes.length){
@@ -176,7 +178,7 @@ public class MotorJuego extends EscenarioJuego{
                     se.PlaySonido2();
                         exp.setBounds(av.getX(),av.getY(),exp.getWidth(),exp.getHeight());
                         av.setBounds(+900,av.getY(),av.getWidth(),av.getHeight());
-                        expp=1;banexp=1;////////////////////////////
+                        expp=1;banexp=1;
                 //banV++;
                 
                  puentes[i+1].setBounds(puentes[i].getX(),puentes[i+1].getY()+5,puentes[i+1].getWidth(),puentes[i+1].getHeight());
@@ -216,7 +218,8 @@ public class MotorJuego extends EscenarioJuego{
                     } 
                 }   
             }
-            //movimiento de los enemigos con relacion al tiempo
+            
+            /**movimiento de los enemigos con relacion al tiempo*/
             if(timerJuego.getDelay()==80){
             t+=1.5; G-=3;
                for (int  i = 0;  i < ene.length;  i++) {
@@ -235,15 +238,18 @@ public class MotorJuego extends EscenarioJuego{
             }
             
             ImageLoader loader =ImageLoader.getInstance();
-             ImageIcon icon;
-            //movimiento fondo, gasolina
+            ImageIcon icon;
+             
+           /**movimiento fondo, gasolina*/
            ff+=5;
             fn.setY(ff);
             puntos=String.format("%05d", score);
             puntaje.setText(puntos);
-            //movimiento gasolina
+            
+            /**movimiento gasolina*/
             gas.setBounds(gas.getX(),gas.getY()+5,gas.getWidth(),gas.getHeight());
-            //colicion avion gasolina
+            
+            /**colicion avion gasolina*/
             a=av.getBounds().intersects( gas.getBounds());
             if(a==true){
                 con++;
@@ -251,7 +257,8 @@ public class MotorJuego extends EscenarioJuego{
                 G=1200;con=0;}
             };
             if(gas.getY()>700){z=2;}
-            //coliccion misiles con otros
+            
+            /**coliccion misiles con otros*/
             for(int j=0;j<ma.length;j++){   
                 ma[j].setBounds(ma[j].getX(), ma[j].getY()-15,ma[j].getWidth(),ma[j].getHeight());
                 if(ma[j].getY()<20){
@@ -268,7 +275,8 @@ public class MotorJuego extends EscenarioJuego{
                     ma[j].setBounds(-100, ma[j].getY()-10,ma[j].getWidth(),ma[j].getHeight());
                 }
             }
-            //coliciones enemigos con (varios)
+            
+            /**coliciones enemigos con (varios)*/
             for(int j=0;j<ene.length;j++){
                 ene[j].setBounds(ene[j].getX(),ene[j].getY()+5,ene[j].getWidth(),ene[j].getHeight());
                 //colicion avion con enemigos
@@ -291,7 +299,8 @@ public class MotorJuego extends EscenarioJuego{
                     ene[j].setBounds(-100,1001,ene[j].getWidth(),ene[j].getHeight());
                     }
             }
-            //coliccion misiles con enemigos
+            
+            /**coliccion misiles con enemigos*/
             for(int i=0;i<ma.length;i++){
                 for(int j=0;j<ene.length;j++){
                 a=false;
@@ -307,7 +316,8 @@ public class MotorJuego extends EscenarioJuego{
                 }
                 }
             }
-            //Bordes (movimiento y colicion)
+            
+            /**Bordes (movimiento y colicion)*/
             for (int i = 0; i < bor.length; i++) {
                     bor[i].setBounds(bor[i].getX(),bor[i].getY()+5,bor[i].getWidth(),bor[i].getHeight());
                         //avion coliciona con bordes
@@ -319,6 +329,7 @@ public class MotorJuego extends EscenarioJuego{
                         av.setBounds(+900,av.getY(),av.getWidth(),av.getHeight());
                         expp=1;banexp=1;
                         }
+                        
                         //gasolina con bordes
                         if(i<bor.length){
                         a=false;
@@ -334,7 +345,8 @@ public class MotorJuego extends EscenarioJuego{
                             gas.setBounds(gas.getX()-50,gas.getY(),gas.getWidth(),gas.getHeight());
                             }
                         }//fin gasolina con bordes
-                //enemigo bordes 
+                        
+                /**enemigo bordes*/ 
                 if(banB==0){
                         for(int j=0;j<ene.length;j++){
                             if(i<bor.length/2){
@@ -370,15 +382,18 @@ public class MotorJuego extends EscenarioJuego{
                             }
                         }
                     }
-                }//enemigo bordes   
+                }//enemigo bordes
+                
             }banB=1;
-            //Gasolina 
+            
+            /**Gasolina*/
             if(z==2){
             int x=(int)(Math.random()*500);
             gas.setBounds(x+100,-50,gas.getWidth(),gas.getHeight());
             z=0;
             }
-            //movimiento de enemigos
+            
+            /**movimiento de enemigos*/
             for (int  i = 0;  i < ene.length;  i++) {
                 if(ene[i].getene()==1||ene[i].getene()==3){
                    for (int j = 0; j < bor.length; j++) {
@@ -410,7 +425,8 @@ public class MotorJuego extends EscenarioJuego{
                    }  
                 }  
             }//fin movimiento de enemigos
-            //vidad
+            
+            /**vidad*/
             if(vidas==3){
             loader =ImageLoader.getInstance();
             icon=loader.getImagen(ImageLoader.vida0);
@@ -431,7 +447,8 @@ public class MotorJuego extends EscenarioJuego{
             icon=loader.getImagen(ImageLoader.vida1);
             vida.setBounds(-1000, 0, icon.getIconWidth(),icon.getIconHeight() );
             }
-            //explocion
+            
+            /**explocion*/
             if(expp==1){
             icon=loader.getImagen(ImageLoader.E2);
             exp.setIcon(icon);
@@ -461,7 +478,8 @@ public class MotorJuego extends EscenarioJuego{
             if(expp==2||expp==4||expp==6||expp==8||expp==10){
             expp++;
             }
-            //gasolina
+            
+            /**gasolina*/
             if(G<=1220&&G>1000){
             loader =ImageLoader.getInstance();
             gasolina.setIcon(loader.getImagen(ImageLoader.G1));
@@ -492,23 +510,26 @@ public class MotorJuego extends EscenarioJuego{
             banV=1;
             G=1210;
             }//fin gasolina
-            //perder vidad
+            
+            /**perder vidad*/
             if(banV==1){
             
-            av.setBounds(300,600,av.getWidth(),av.getHeight());
-            vidas--;
-            if(vidas>0){
-            band_s=2;
-            JOptionPane.showMessageDialog(null,"Vidas Restantes= "+vidas);}
-            av.setAx();
-            gas.setBounds(gas.getX(),gas.getY()-250,gas.getWidth(),gas.getHeight());
-            for(int j=0;j<ene.length;j++){
-            ene[j].setBounds(ene[j].getX(),ene[j].getY()-250,ene[j].getWidth(),ene[j].getHeight());
-            ma[j].setBounds(ma[j].getX(), ma[j].getY()-500,ma[j].getWidth(),ma[j].getHeight());
-            banB=0;G=1210;
+                av.setBounds(300,600,av.getWidth(),av.getHeight());
+                vidas--;
+                if(vidas>0){
+                    band_s=2;
+                    JOptionPane.showMessageDialog(null,"Vidas Restantes= "+vidas);
+                }
+                av.setAx();
+                gas.setBounds(gas.getX(),gas.getY()-250,gas.getWidth(),gas.getHeight());
+                for(int j=0;j<ene.length;j++){
+                    ene[j].setBounds(ene[j].getX(),ene[j].getY()-250,ene[j].getWidth(),ene[j].getHeight());
+                    ma[j].setBounds(ma[j].getX(), ma[j].getY()-500,ma[j].getWidth(),ma[j].getHeight());
+                    banB=0;G=1210;
+                }
             }
-            }
-            //se cuente el Tiempo
+            
+            /**se cuenta el Tiempo*/
                 tmin= String.format("%02d", min);
                 tseg= String.format("%02d", seg);
                 tiemp= "("+tmin+":"+tseg+")";
@@ -521,7 +542,8 @@ public class MotorJuego extends EscenarioJuego{
                     seg=0;
                     min++;
                 } 
-                //se acabo el juego
+                
+                /**se acabo el juego*/
                 if(min==1||vidas==0){
                     score+=vidas*1000;
                     seg++;min++;
@@ -616,10 +638,14 @@ public class MotorJuego extends EscenarioJuego{
                     }//condicion para crear el archivo con las puntuaciones
                     
                 JOptionPane.showMessageDialog(null,"JUEGO TERMINADO \n\nPuntos= "+puntos+"   "+"Tiempo= "+tiemp+"");
+                
+                /**SE REINCIA TODOS LOS CONTADORES DE VIDA Y LAS POSCIONES Y ENEMIGOS PARA EL CASO DE QUE SE 
+                    RINICIE EL JUEGO ENSEGUIDA*/
+                
                 for (int  i = 0;  i < puentes.length;  i+=2) {
-                puentes[i].setBounds(0,py,puentes[i].getWidth(),puentes[i].getHeight());
-                puentes[i+1].setBounds(-5000,py,puentes[i+1].getWidth(),puentes[i+1].getHeight());
-                py-=2460;
+                    puentes[i].setBounds(0,py,puentes[i].getWidth(),puentes[i].getHeight());
+                    puentes[i+1].setBounds(-5000,py,puentes[i+1].getWidth(),puentes[i+1].getHeight());
+                    py-=2460;
                 }   
                 vidas=3;score=0;
                 seg=0;min=0;
@@ -627,10 +653,10 @@ public class MotorJuego extends EscenarioJuego{
                 av.setAx();
                     int ranx,ranE;
                     for(int i=0;i<ene.length;i++){
-                    ranx=(int)(Math.random()*500)+100;
-                    rany-=100;
-                    ranE=(int)(Math.random()*4)+1;
-                    ene[i].setBounds(ranx,rany,ene[i].getWidth(),ene[i].getHeight());
+                        ranx=(int)(Math.random()*500)+100;
+                        rany-=100;
+                        ranE=(int)(Math.random()*4)+1;
+                        ene[i].setBounds(ranx,rany,ene[i].getWidth(),ene[i].getHeight());
                     } 
                     rany=0;
                     int rang=(int)(Math.random()*4)+1;

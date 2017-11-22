@@ -15,45 +15,62 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
 import static riverraid.ImageLoader.*;
 
+/**CLASE DONDE CARGO Y UBICO CADA UNO DE LOS OBJETOS A INTERACTUAR DEL JUEGO Y LOS PONGO EN JFRAME*/
+
 public class EscenarioJuego extends JFrame{
         public int hF,wF,yf=0,hB,wB,xa=300,ya=500,q1=1,qa=0,c,d,rany=200,posYa=700,posYb=700,py=-1760;
         public JLabel m[],e[],p;
         public Bordes bor[];
-        public enemigos ene[];
+        public Enemigos ene[];
         public Frame M,MF;
         public int[] rb;
         public int band=0;
         public Avion a;
-        public puente puentes[];
+        public Puente puentes[];
         public static SonidoAvion sa1= new SonidoAvion();
         public static SonidoExplosion se1= new SonidoExplosion();
+        
         /** contrutor por defecto*/
         public EscenarioJuego(){
         
         }
-        /** contrutor por defecto donde se le pone nombre de la ventana */
+        
+        /** constructor parametrico donde se le da nombre de la ventana */
         public EscenarioJuego(String nombre,Frame frame){
         super(nombre);
+        
+        /**se le agrega un icono a la ventana*/
         Image icon = new ImageIcon(getClass().getResource("image/logo.png")).getImage();
         this.setIconImage(icon);
+        
+        /**M se iguala al frame que se recibe por parte de MainFrame*/
         M=frame;
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.addWindowListener(new WindowsEvents());
+        
+        /**Se inicializan las posiciones*/
         iniciar(frame);
         }
+        
         /**metodo donde se agregan todos los componentes al JFrame */
         public void iniciar(Frame frame){
         ImageLoader loader =ImageLoader.getInstance();
         ImageIcon icon;
+        
+        /**los componentes se agragan de manera manual*/
         this.getContentPane().setLayout(null);
-        m=new JLabel[100];
-        ene=new enemigos[100];
-        bor=new Bordes[40];
-        puentes=new puente[16];
+        
+        m=new JLabel[100];/**se crea un vector de misiles*/
+        ene=new Enemigos[100];/**se crea un vector de enemigos*/
+        bor=new Bordes[40];/**se crea un vector para todas las montañas*/
+        puentes=new Puente[16];/**se crean puentes*/
+        
         final MotorJuego mj=new MotorJuego();
-        a = new Avion(300,600);
+        a = new Avion(300,600); /**se añade el avion*/
         this.getContentPane().add(a.getAvion());
         
+        /**se añade las gasolinas, el contador de ountos y de tiempo y de vidas
+           asi como tambien el contador de gasolina y los marcos del juego*/
         this.getContentPane().add(mj.getPuntos());
         this.getContentPane().add(mj.getGasolina());
         this.getContentPane().add(mj.getVida());
@@ -68,16 +85,18 @@ public class EscenarioJuego extends JFrame{
         this.getContentPane().add(mj.getexp());
         
         
-        
+        /**for para añadir los puentes*/
             for (int  i = 0;  i < puentes.length;  i+=2) {
                 if(i<puentes.length){
-                puentes[i]=new puente(0,py,1);
+                puentes[i]=new Puente(0,py,1);
                 this.getContentPane().add(puentes[i]);
-                puentes[i+1]=new puente(-5000,py,2);
+                puentes[i+1]=new Puente(-5000,py,2);
                 this.getContentPane().add(puentes[i+1]);
                 py-=2460;
                 }
             }
+        
+        /**se añaden los puntes al mapa*/
         rb=new int[bor.length/2];
         for(int y=0;y<bor.length/2;y++){
              if(y==4||y==9||y==14||y==19){
@@ -92,6 +111,8 @@ public class EscenarioJuego extends JFrame{
                 this.getContentPane().add(bor[y]);
                 }
         }
+        
+        /**se ubican los puentes*/
        for(int y=bor.length/2;y<bor.length;y++){
             if(y==24||y==29||y==34||y==39){
                  posYb-=60;
@@ -106,6 +127,8 @@ public class EscenarioJuego extends JFrame{
                     this.getContentPane().add(bor[y]);
                     }
         }
+       
+       /**se carga cada uno de los misiles e el vector*/
         icon=loader.getImagen(ImageLoader.misil);
         int w=icon.getIconWidth(),h=icon.getIconHeight();
         for(int i=0;i<m.length;i++){
@@ -114,28 +137,38 @@ public class EscenarioJuego extends JFrame{
         this.getContentPane().add(m[i]);
         }   
         
+        /**se ponen las gasolinas*/
         this.getContentPane().add(mj.getGas());
         c=a.getX()+27; d=a.getY()-46;
         int ranx,ranE;
+        
+        /**se agregan todos los enemigos*/
         for(int i=0;i<ene.length;i++){
         ranx=(int)(Math.random()*500)+100;
         rany-=100;
         ranE=(int)(Math.random()*4)+1;
-        ene[i]=new enemigos(ranx,rany,ranE);
+        ene[i]=new Enemigos(ranx,rany,ranE);
         this.getContentPane().add(ene[i].getenemigos());
         }  
+        
+        /**se añade el fonfo*/
         Fondo f=new Fondo();
         this.getContentPane().add(f.getF());
         setResizable(false);
         mj.iniciar(a,f,m,ene,bor,puentes,frame,this);
+        
+        /**escuchador para la teclas*/
         this.addKeyListener(new KeyAdapter(){
+            
+            /**si se presiona flecha arriba el avion acelera*/
             public void keyPressed(KeyEvent e){
                 if(e.getKeyCode()==e.VK_UP){ 
                     if(a.getY()>0)
-                        mj.setT(50);
+                        mj.setT(50);/**se disminuye la velcidad del timer del juego*/
                     a.setBounds(a.getX(),a.getY(), a.getWidth(), a.getHeight());
                     c=a.getX()+27; d=a.getY()-46;
-                  }   
+                  }
+                /**movimientos laterales del avion*/
                 if(e.getKeyCode()==e.VK_LEFT) 
                   if(a.getY()>0){
                     a.setBounds(a.getX()-10,a.getY(), a.getWidth(), a.getHeight());
@@ -147,18 +180,22 @@ public class EscenarioJuego extends JFrame{
                       c=a.getX()+27; d=a.getY()-46;
                   }
                 }
+                /**al presional enter el juego inicia, tambien se reanuda si se esta en pausa*/
                 if(e.getKeyCode()==e.VK_ENTER){
+                    /**se inicia o reanuda el sonido y el ritmo de juego*/
                     mj.StartT();
                     sa1.PlaySonido3();
                     se1.PlaySonido2();
                 }
-                
+                /**al presional p el juego se detiene*/
                 if(e.getKeyCode()==e.VK_P){
+                        /**se detiene el sonido y el ritmo de juego*/
                         mj.StopT();
                         sa1.StopSonido3();
                         se1.StopSonido2();
                 }
                 
+                /**se accionan los misiles*/
                 if(e.getKeyCode()==e.VK_SPACE){ 
                      a.setBounds(a.getX(),a.getY(), a.getWidth(), a.getHeight());
                       c=a.getX()+27; d=a.getY()-46;
@@ -181,6 +218,7 @@ public class EscenarioJuego extends JFrame{
                     }
                 }
             }
+            
             public void keyReleased(KeyEvent e){
              if(e.getKeyCode()==e.VK_UP)
                   { 

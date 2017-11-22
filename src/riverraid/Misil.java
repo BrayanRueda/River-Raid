@@ -18,10 +18,11 @@ public class Misil extends JLabel{
         this.x = x;
         this.y = y;
           
+        ///////////////////////SE CREA EL MISIL
         Crear();
     } 
 
-       
+    /**RECIBO LA IMAGEN QUE VAA POSEER EL JLABEL DEL MISIL Y LE DOY TAMAÑO Y POSICION */ 
   public void Crear(){
       ImageLoader loader =ImageLoader.getInstance();
       ImageIcon icon; 
@@ -34,14 +35,16 @@ public class Misil extends JLabel{
   }
   
   
-  
+  /**RETORNO LAS CORDENADAS Y TAMAÑO DEL MISIL*/
     public Rectangle getRectanguloMisil(){
         return getBounds();
     }
+    
     /**Enviar el Avion  */
     public JLabel getMisil(){
         return this;}
-    /**Set de coordenadas y ancho y alto   */ 
+    
+    /**SET COORDENADAS DE ANCHO Y ALTO*/
     public void setXM(int x) {
     setBounds(x,y,w,h);
     this.x=x;
