@@ -7,7 +7,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import static riverraid.ImageLoader.*;
-
+/**CLASE QUE CREA LOS MISILES*/
 
 public class Misil extends JLabel{
   public int x,y,h,w;

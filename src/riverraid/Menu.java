@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 /**
- *DESDE AQUI SE CONTROLA EL JUEGO
+ *MENU PRINCIPAL DEL JUEGO
  * @author CHIRLY
  */
 public class Menu {

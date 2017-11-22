@@ -22,7 +22,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import riverraid.EscenarioJuego.Fondo;
 
-
+/**CLASE QUE MANDA EL NOMBRE DE LA VENTANA*/
 
 public class MainFrame {
    

@@ -2,12 +2,12 @@ package riverraid;
 
 import java.net.URL;
 import javax.swing.ImageIcon;
-/**CLASE QUE CARGA TODAS LAS IMAGENES A SER MOSTRADAS EN EL JUEGO*/
 
-/**CADA VALOR REPRESENTA UNA IMAGEN EN ESPECIFICA QUE VA A SER CARGADA EN EL VECTOR*/
+/**CLASE QUE CARGA TODAS LAS IMAGENES A SER MOSTRADAS EN EL JUEGO*/
 public class ImageLoader {
      private static ImageLoader instance=null;
     
+     /**CADA VALOR REPRESENTA UNA IMAGEN EN ESPECIFICA QUE VA A SER CARGADA EN EL VECTOR*/
      public static final int TOTAL_IMAGES=37;
      public static final int Avion=0;
      public static final int vida0=1;
