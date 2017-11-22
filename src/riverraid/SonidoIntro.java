@@ -7,12 +7,12 @@ package riverraid;
 import java.applet.AudioClip;
 import java.net.URL;
 /**
- *INTRO DEL JUEGO, SONIDO DE AMBIENTACION
+ *CLASE QUE EJECUTA EL SONIDO DE AMBIENTACION DEL JUEGO
  * @author CHIRLY
  */
 public class SonidoIntro {
     public static AudioClip sonido;
-    /**CARGO LA CANCION PARA AMBIENTAR EL JUEGO*/
+    /**CONSTRUCTOR QUE CARGA LA CANCION DEL JUEGO*/
     public SonidoIntro(){
         URL url = getClass().getResource("sonido/Crawling.mid");
         sonido= java.applet.Applet.newAudioClip(url);

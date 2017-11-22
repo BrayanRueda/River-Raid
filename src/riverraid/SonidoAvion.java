@@ -9,24 +9,24 @@ import java.applet.AudioClip;
 import java.net.URL;
 import static riverraid.SonidoExplosion.sonido2;
 
-/**EFECTO DE SONIDO DEL MOTOR DEL AVION
+/**CLASE QUE EJECUTA EL SONIDO DEL MOTOR DEL AVION
  *
  * @author CHIRLY
  */
 public class SonidoAvion {
     public static AudioClip sonido3;
     
-    /**CARGO EL SONIDO QUE HACE EL AVION EN SU TRAYECTORIA*/
+    /**CONSTRUCTOR QUE CARGA EL AUDIO DEL AVION*/
     SonidoAvion(){
         URL url = getClass().getResource("sonido/avion.wav");
         sonido3= java.applet.Applet.newAudioClip(url);
     }
     
-    /**METODO PARA REPRODUCIR EL SONIDO*/
+    /**METODO PARA REPRODUCIR EL SONIDO DEL AVION*/
     public void PlaySonido3(){
         sonido3.play();
     }
-    /**METODO PARA DETENER EL SONIDO*/
+    /**METODO PARA DETENER EL SONIDO DEL AVION*/
     public void StopSonido3(){
         sonido3.stop();
     }

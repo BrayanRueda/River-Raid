@@ -61,7 +61,7 @@ public class ImageLoader {
         "exp2.png","exp3.png","exp4.png","exp5.png","exp6.png","pd1.png","pd2.png","pd3.png","pi1.png","pi2.png","pi3.png","p1.png","p2.png",
         "pi4.png","pd4.png","logo.png"};
         
-        /**LLENA EL VECTOR CON LAS RUTAS DE LAS IMAGENES PARA MOSTRARLAS*/
+        //LLENA EL VECTOR CON LAS RUTAS DE LAS IMAGENES PARA MOSTRARLAS
         images = new ImageIcon[TOTAL_IMAGES];
         for(int i=0;i<TOTAL_IMAGES;i++){
             URL url = this.getClass().getResource("image/"+nombres[i]);
@@ -69,7 +69,7 @@ public class ImageLoader {
         }
     }
      
-     /** para que haya solo 1 instancia  */
+     // para que haya solo 1 instancia
      public static ImageLoader getInstance(){
          if(instance==null)
           instance = new ImageLoader();
@@ -77,7 +77,7 @@ public class ImageLoader {
          return instance ;
      }
      
-     /** retorna la imagen */
+     //retorna la imagen
      public ImageIcon getImagen(int imageId){
      if(imageId<0 || imageId>=TOTAL_IMAGES)
             return null;

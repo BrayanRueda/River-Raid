@@ -23,13 +23,12 @@ import javax.swing.JLabel;
 import riverraid.EscenarioJuego.Fondo;
 
 /**CLASE QUE MANDA EL NOMBRE DE LA VENTANA*/
-
 public class MainFrame {
    
     public MainFrame(JFrame frame){
-        /**SE MANDA NOMBRE DE LA VENTANA Y FRAME*/
+        //SE MANDA NOMBRE DE LA VENTANA Y FRAME
         EscenarioJuego ej=new EscenarioJuego("River Raid",frame);
-        /**se hace visible la ventana de juego*/
+        //se hace visible la ventana de juego
        ej.setVisible(true);
  
         

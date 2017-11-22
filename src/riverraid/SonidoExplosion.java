@@ -9,23 +9,23 @@ import java.applet.AudioClip;
 import java.net.URL;
 import static riverraid.SonidoIntro.sonido;
 
-/**EFECTO DE SONIDO QUE SE EJECUTA CADA VEZ QUE HAY UNA COLICION ENTRE EL AVION CON OTROS OBJETOS O LOS MISILES CON SUS OBJETIVOS
+/**CLASE QUE EJECUTA EL SONIDO DE LAS EXPLOSIONES
  *
  * @author CHIRLY
  */
 public class SonidoExplosion {
     public static AudioClip sonido2;
     
-    /**CARGO EL SONIDO DE EXPLOSION*/
+    /**CONSTRUCTOR QUE CARGA EL AUDIO DE EXPLOSION*/
     SonidoExplosion(){
         URL url = getClass().getResource("sonido/explosion.wav");
         sonido2= java.applet.Applet.newAudioClip(url);
     }
-    /**SE REPRODUCE EL SONIDO*/
+    /**METODO QUE REPRODUCE EL SONIDO DE EXLPLOSION*/
     public void PlaySonido2(){
         sonido2.play();
     }
-    /**SE DETIENE EL SONIDO*/
+    /**METODO QUE DETIENE EL SONIDO DE EXPLOSION*/
     public void StopSonido2(){
         sonido2.stop();
     }

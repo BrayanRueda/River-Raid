@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 /**
- *MENU PRINCIPAL DEL JUEGO
+ *CLASE QUE MUESTRA EL MENU PRINCIPAL DEL JUEGO
  * @author CHIRLY
  */
 public class Menu {
@@ -23,11 +23,12 @@ public class Menu {
     MotorJuego obj= new MotorJuego();
     public  static SonidoIntro sound= new SonidoIntro();
     
-    public Menu(){/**CONTRUCTOR POR DEFECTO*/
+    /**CONTRUCTOR POR DEFECTO*/
+    public Menu(){
         
     }
     
-    /**se relizan las opciones del menu*/
+    /**Metodo que ejecuta las opciones del menu*/
     public void Jugar(){
         
         /**se crea la ventana principal del juego y sus opciones*/
@@ -61,12 +62,18 @@ public class Menu {
                 
         /**ACCIONES A REALIZAR SI EL USUARIO PRESIONA LA OPCION JUGAR*/
         jugar.addMouseListener(new MouseAdapter(){
+            
+            /**Metodo que ejecuta la accion si el mouse esta apuntando el JLabel Jugar*/
             public void mouseEntered(MouseEvent e){
                 jugar.setIcon(new ImageIcon(getClass().getResource("image/jugar2.png")));
             }
+            
+            /**Metodo que ejecuta la accion si el mouse no esta apuntando el JLabel Jugar*/
             public void mouseExited(MouseEvent e){
                 jugar.setIcon(new ImageIcon(getClass().getResource("image/jugar.png")));
             }
+            
+            /**Metodo que ejecuta la accion si se hace clic en el JLabel Jugar*/
             public void mousePressed(MouseEvent e){
                 
                 /**SE CREA UNA VENTANA DONDE SE INGRESA NOMBRE DE USUARIO*/
@@ -93,9 +100,11 @@ public class Menu {
                 container1.add(jugador);
                 
                 jugador.addActionListener(new ActionListener(){
+                    
+                    /**Metodo que ejecuta la accion sise preciona la tecla ENTER*/
                     public void actionPerformed( ActionEvent event ){
                         
-                        /**se valida que el nombre de jugador no sea mayor a 8 caracteres ni menor a 4*/
+                        //Se valida que el nombre de jugador no sea mayor a 8 caracteres ni menor a 4
                         if(jugador.getText().length()<4){
                            JOptionPane.showMessageDialog(null, "El nombre debe ser mayor a 4 caracteres","Error",JOptionPane.ERROR_MESSAGE);
                         }
@@ -104,7 +113,7 @@ public class Menu {
                         }
                         else{
                             
-                            /**EL JUEGO INICIA*/
+                            ///EL JUEGO INICIA
                             nomJug= jugador.getText();
                             nombre.setVisible(false);
                             frame.setVisible(false);
@@ -116,7 +125,7 @@ public class Menu {
                     }
                 });
                 
-                /**PARAMETROS DE LA VENTANA DONDE SE INGRESA EL NOMBRE*/
+                //PARAMETROS DE LA VENTANA DONDE SE INGRESA EL NOMBRE
                 nombre.setBounds(0, 0, 300, 150);
                 Image icon = new ImageIcon(getClass().getResource("image/logo.png")).getImage();
                 nombre.setIconImage(icon);
@@ -126,15 +135,20 @@ public class Menu {
             }
         } );/**ACCIONES DE JUGAR*/
         
-
-        instruc.addMouseListener(new MouseAdapter(){/**ACCIONES A REALIZAR SI EL USUARIO PRESIONA LA OPCION INSTRUCCIONES*/
+        /**ACCIONES A REALIZAR SI EL USUARIO PRESIONA LA OPCION INSTRUCCIONES*/
+        instruc.addMouseListener(new MouseAdapter(){
+            
+            /**Metodo que ejecuta la accion si el mouse esta apuntando el JLabel Instrucciones*/
             public void mouseEntered(MouseEvent e){
                 instruc.setIcon(new ImageIcon(getClass().getResource("image/instrucciones2.png")));
             }
+            
+            /**Metodo que ejecuta la accion si el mouse no esta apuntando el JLabel Instrucciones*/
             public void mouseExited(MouseEvent e){
                 instruc.setIcon(new ImageIcon(getClass().getResource("image/instrucciones.png")));
             }
             
+            /**Metodo que ejecuta la accion si se hace clic en el JLabel Instrucciones*/
             public void mousePressed(MouseEvent e){
                 frame1= new JFrame("River Raid 1.0");
                 JLabel fondo1,disparo,direccion,acelerar,pausa;
@@ -209,12 +223,18 @@ public class Menu {
                 
                /**SI EL USUARIO PRECIONA LA OPCION MENU DENTRO DE LA VENTANA DE INSTRUCCIONES SE VUELVE A MOSTRAR EL MENU PRINCIPAL*/
                 regresar.addMouseListener(new MouseAdapter(){
+                    
+                    /**Metodo que realiza la accion si el mouse apunta el JLabel regresar*/
                     public void mouseEntered(MouseEvent e){
                         regresar.setIcon(new ImageIcon(getClass().getResource("image/menu2.png")));
                     }
+                    
+                    /**Metodo que realiza la accion si el mouse no apunta el JLabel regresar*/
                     public void mouseExited(MouseEvent e){
                         regresar.setIcon(new ImageIcon(getClass().getResource("image/menu.png")));
                     }
+                    
+                    /**Metodo que realiza la accion si se hace clic en el JLabel regresar*/
                     public void mousePressed(MouseEvent e){
                         frame1.setVisible(false);
                         frame.setVisible(true);   
@@ -232,15 +252,20 @@ public class Menu {
             }
         } );//ACCIONES DE INSTRUCCCION
         
-        punt.addMouseListener(new MouseAdapter(){/**ACCIONES A REALIZAR SI EL USUARIO PRESIONA LA OPCION PUNTUACION*/
-
+        /**ACCIONES A REALIZAR SI EL USUARIO PRESIONA LA OPCION PUNTUACION*/
+        punt.addMouseListener(new MouseAdapter(){
+            
+            /**Metodo que realiza la accion si el mouse apunta el JLabel puntuacion*/
             public void mouseEntered(MouseEvent e){
                 punt.setIcon(new ImageIcon(getClass().getResource("image/puntuaciones2.png")));
             }
+            
+            /**Metodo que realiza la accion si el mouse no apunta el JLabel puntuacion*/
             public void mouseExited(MouseEvent e){
                 punt.setIcon(new ImageIcon(getClass().getResource("image/puntuaciones.png")));
             }
             
+            /**Metodo que realiza la accion si se hace clic en el JLabel puntuacion*/
             public void mousePressed(MouseEvent e){
                                               
                 /**MANEJO DE PUNTAJES*/
@@ -343,18 +368,23 @@ public class Menu {
                 
                 /**SI EL USUARIO PRECIONA LA OPCION MENU DENTRO DE LA VENTANA DE PUNTUACIONES VUELVE A MOSTRAR EL MENU PRINCIPAL*/
                 regresar.addMouseListener(new MouseAdapter(){
+                    
+                    /**Metodo que realiza la accion si el mouse apunta el JLabel regresar*/
                     public void mouseEntered(MouseEvent e){
                         regresar.setIcon(new ImageIcon(getClass().getResource("image/menu2.png")));
                     }
+                    
+                    /**Metodo que realiza la accion si el mouse no apunta el JLabel regresar*/
                     public void mouseExited(MouseEvent e){
                         regresar.setIcon(new ImageIcon(getClass().getResource("image/menu.png")));
                     }
+                    
+                    /**Metodo que realiza la accion si se hace clic en el JLabel regresar*/
                     public void mousePressed(MouseEvent e){
-                    frame2.setVisible(false);
-                    frame.setVisible(true);
-
+                        frame2.setVisible(false);
+                        frame.setVisible(true);   
                     }
-                } );
+                } );///ACCIONES PARA REGRESAR AL MENU PRINCIPAL
             
             /**SE CREA UN FRAME QUE MIUESTRE LAS PUNTUACIONES Y SE OCULTA EL MENU PRINCIPAL MOMENTANEAMENTE*/
             frame2.setBounds(350, 100, 700, 700);
@@ -371,12 +401,18 @@ public class Menu {
         
         /**ACCIONES SI EL USUARIO PRESIONA LA OPCION CREDITOS*/
         credi.addMouseListener(new MouseAdapter(){
+            
+            /**Metodo que raliza la accion si el mouse apunta al JLabel creditos*/
             public void mouseEntered(MouseEvent e){
                 credi.setIcon(new ImageIcon(getClass().getResource("image/creditos2.png")));
             }
+            
+            /**Metodo que raliza la accion si el mouse no apunta al JLabel creditos*/
             public void mouseExited(MouseEvent e){
                 credi.setIcon(new ImageIcon(getClass().getResource("image/creditos.png")));
             }
+            
+            /**Metodo que raliza la accion si se hace clic en el JLabel creditos*/
             public void mousePressed(MouseEvent e){
                 frame3= new JFrame("River Raid 1.0");
                 JLabel fondo1,titulo,autores,nombre1,nombre2,prof,nombre3;
@@ -431,16 +467,21 @@ public class Menu {
                 
                 /**SI EL USUARIO PRECIONA LA OPCION MENU DENTRO DE LA VENTANA DE CREDITOS VUELVE A MOSTRAR EL MENU PRINCIPAL*/
                 regresar.addMouseListener(new MouseAdapter(){
+                    
+                    /**Metodo que realiza la accion si el mouse apunta el JLabel regresar*/
                     public void mouseEntered(MouseEvent e){
                         regresar.setIcon(new ImageIcon(getClass().getResource("image/menu2.png")));
                     }
+                    
+                    /**Metodo que realiza la accion si el mouse no apunta el JLabel regresar*/
                     public void mouseExited(MouseEvent e){
                         regresar.setIcon(new ImageIcon(getClass().getResource("image/menu.png")));
                     }
+                    
+                    /**Metodo que realiza la accion si se hace clic en el JLabel regresar*/
                     public void mousePressed(MouseEvent e){
                         frame3.setVisible(false);
-                        frame.setVisible(true);
-
+                        frame.setVisible(true);   
                     }
                 } );///ACCIONES PARA REGRESAR AL MENU PRINCIPAL
                 
@@ -458,16 +499,22 @@ public class Menu {
         
         /**EL JUEGO SE CIERRA POR COMPLETO*/
         salir.addMouseListener(new MouseAdapter(){
+            
+            /**Metodo que realiza la accion si el mouse apunta el JLabel salir*/
             public void mouseEntered(MouseEvent e){
                 salir.setIcon(new ImageIcon(getClass().getResource("image/salir2.png")));
             }
+            
+            /**Metodo que realiza la accion si el mouse no apunta el JLabel salir*/
             public void mouseExited(MouseEvent e){
                 salir.setIcon(new ImageIcon(getClass().getResource("image/salir.png")));
             }
+            
+            /**Metodo que realiza la accion si se hace clic en el JLabel salir*/
             public void mousePressed(MouseEvent e){
                 System.exit(0);
             }
-        } );///////
+        } );
         
         /**TAMAÑO Y SONIDO DE LA VENTANA PRINCIPAL*/
         sound.PlaySonido();

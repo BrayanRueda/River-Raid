@@ -15,8 +15,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
 import static riverraid.ImageLoader.*;
 
-/**CLASE DONDE CARGO Y UBICO CADA UNO DE LOS OBJETOS A INTERACTUAR DEL JUEGO Y LOS PONGO EN JFRAME*/
-
+/**CLASE DONDE SE CARGA Y UBICA LOS OBJETOS A INTERACTUAR DEL JUEGO*/
 public class EscenarioJuego extends JFrame{
         public int hF,wF,yf=0,hB,wB,xa=300,ya=500,q1=1,qa=0,c,d,rany=200,posYa=700,posYb=700,py=-1760;
         public JLabel m[],e[],p;
@@ -30,47 +29,46 @@ public class EscenarioJuego extends JFrame{
         public static SonidoAvion sa1= new SonidoAvion();
         public static SonidoExplosion se1= new SonidoExplosion();
         
-        /** contrutor por defecto*/
+        /**Contrutor por defecto*/
         public EscenarioJuego(){
         
         }
         
-        /** constructor parametrico donde se le da nombre de la ventana */
+        /**Constructor parametrico donde se le da nombre de la ventana */
         public EscenarioJuego(String nombre,Frame frame){
         super(nombre);
         
-        /**se le agrega un icono a la ventana*/
+        //se le agrega un icono a la ventana
         Image icon = new ImageIcon(getClass().getResource("image/logo.png")).getImage();
         this.setIconImage(icon);
         
-        /**M se iguala al frame que se recibe por parte de MainFrame*/
+        //M se iguala al frame que se recibe por parte de MainFrame
         M=frame;
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.addWindowListener(new WindowsEvents());
         
-        /**Se inicializan las posiciones*/
+        //Se inicializan las posiciones
         iniciar(frame);
         }
         
-        /**metodo donde se agregan todos los componentes al JFrame */
+        /**Metodo donde se agregan todos los componentes al JFrame */
         public void iniciar(Frame frame){
         ImageLoader loader =ImageLoader.getInstance();
         ImageIcon icon;
         
-        /**los componentes se agragan de manera manual*/
         this.getContentPane().setLayout(null);
         
-        m=new JLabel[100];/**se crea un vector de misiles*/
-        ene=new Enemigos[100];/**se crea un vector de enemigos*/
-        bor=new Bordes[40];/**se crea un vector para todas las montañas*/
-        puentes=new Puente[16];/**se crean puentes*/
+        m=new JLabel[100];
+        ene=new Enemigos[100];
+        bor=new Bordes[40];
+        puentes=new Puente[16];
         
         final MotorJuego mj=new MotorJuego();
-        a = new Avion(300,600); /**se añade el avion*/
+        a = new Avion(300,600);
         this.getContentPane().add(a.getAvion());
         
-        /**se añade las gasolinas, el contador de ountos y de tiempo y de vidas
-           asi como tambien el contador de gasolina y los marcos del juego*/
+        //se añade las gasolinas, el contador de ountos y de tiempo y de vidas
+        //asi como tambien el contador de gasolina y los marcos del juego
         this.getContentPane().add(mj.getPuntos());
         this.getContentPane().add(mj.getGasolina());
         this.getContentPane().add(mj.getVida());
@@ -85,7 +83,7 @@ public class EscenarioJuego extends JFrame{
         this.getContentPane().add(mj.getexp());
         
         
-        /**for para añadir los puentes*/
+        //for para añadir los puentes
             for (int  i = 0;  i < puentes.length;  i+=2) {
                 if(i<puentes.length){
                 puentes[i]=new Puente(0,py,1);
@@ -96,7 +94,7 @@ public class EscenarioJuego extends JFrame{
                 }
             }
         
-        /**se añaden los puntes al mapa*/
+        //se añaden los puntes al mapa
         rb=new int[bor.length/2];
         for(int y=0;y<bor.length/2;y++){
              if(y==4||y==9||y==14||y==19){
@@ -112,7 +110,7 @@ public class EscenarioJuego extends JFrame{
                 }
         }
         
-        /**se ubican los puentes*/
+        //se ubican los puentes
        for(int y=bor.length/2;y<bor.length;y++){
             if(y==24||y==29||y==34||y==39){
                  posYb-=60;
@@ -128,7 +126,7 @@ public class EscenarioJuego extends JFrame{
                     }
         }
        
-       /**se carga cada uno de los misiles e el vector*/
+       //se carga cada uno de los misiles e el vector
         icon=loader.getImagen(ImageLoader.misil);
         int w=icon.getIconWidth(),h=icon.getIconHeight();
         for(int i=0;i<m.length;i++){
@@ -137,12 +135,12 @@ public class EscenarioJuego extends JFrame{
         this.getContentPane().add(m[i]);
         }   
         
-        /**se ponen las gasolinas*/
+        //se ponen las gasolinas
         this.getContentPane().add(mj.getGas());
         c=a.getX()+27; d=a.getY()-46;
         int ranx,ranE;
         
-        /**se agregan todos los enemigos*/
+        //se agregan todos los enemigos
         for(int i=0;i<ene.length;i++){
         ranx=(int)(Math.random()*500)+100;
         rany-=100;
@@ -151,16 +149,16 @@ public class EscenarioJuego extends JFrame{
         this.getContentPane().add(ene[i].getenemigos());
         }  
         
-        /**se añade el fonfo*/
+        //se añade el fonfo
         Fondo f=new Fondo();
         this.getContentPane().add(f.getF());
         setResizable(false);
         mj.iniciar(a,f,m,ene,bor,puentes,frame,this);
         
-        /**escuchador para la teclas*/
+        //Escuchador para la teclas
         this.addKeyListener(new KeyAdapter(){
             
-            /**si se presiona flecha arriba el avion acelera*/
+            /**Metodo que ejecuta el evento del teclado*/
             public void keyPressed(KeyEvent e){
                 if(e.getKeyCode()==e.VK_UP){ 
                     if(a.getY()>0)
@@ -219,6 +217,7 @@ public class EscenarioJuego extends JFrame{
                 }
             }
             
+            //**Metodo que ejecuta el evento del teclado si se presiona flacha abajo*/
             public void keyReleased(KeyEvent e){
              if(e.getKeyCode()==e.VK_UP)
                   { 
@@ -242,49 +241,60 @@ public class EscenarioJuego extends JFrame{
          yf=yy;
         }
         
+        /**Metodo que recibe la posicion en Y del Mapa*/
         public void setY(int y) {
         setBounds(100,yf+y,wF,hF);}
         
+        /**Metodo que retorna el fondo*/
         public JLabel getF(){
         return this;
         }
         
         }//fin Fondo
+        
      /**  Clase donde se carga las barras*/ 
         public class Barra extends JLabel{
-      
-        Barra(){
-        }
         
-        public JLabel getB1(){
-        ImageLoader loader =ImageLoader.getInstance();
-        ImageIcon icon;
-         
-        icon = loader.getImagen(ImageLoader.barra);
-        setIcon(icon);
-        wB=icon.getIconWidth();
-        hB=icon.getIconHeight();
-        
-        new Rectangle(0,0,wB,hB);
-        setBounds(0,0,wB,hB);
-        return this;
-        }
-        public JLabel getB2(){
-        ImageLoader loader =ImageLoader.getInstance();
-        ImageIcon icon;
-        icon=loader.getImagen(ImageLoader.barra1);
-        setIcon(icon);
-        wB=icon.getIconWidth();
-        hB=icon.getIconHeight();
-        
-        new Rectangle(0,0,wB,hB);
-        setBounds(0,672,wB,hB);
-        return this;
-        }
+            /**Constructor por defecto*/
+            Barra(){
+            }
+
+            /**Metodo que envia la barra superior*/
+            public JLabel getB1(){
+            ImageLoader loader =ImageLoader.getInstance();
+            ImageIcon icon;
+
+            icon = loader.getImagen(ImageLoader.barra);
+            setIcon(icon);
+            wB=icon.getIconWidth();
+            hB=icon.getIconHeight();
+
+            new Rectangle(0,0,wB,hB);
+            setBounds(0,0,wB,hB);
+            return this;
+            }
+
+            /**Metodo que envia la barra inferior*/
+            public JLabel getB2(){
+            ImageLoader loader =ImageLoader.getInstance();
+            ImageIcon icon;
+            icon=loader.getImagen(ImageLoader.barra1);
+            setIcon(icon);
+            wB=icon.getIconWidth();
+            hB=icon.getIconHeight();
+
+            new Rectangle(0,0,wB,hB);
+            setBounds(0,672,wB,hB);
+            return this;
+            }
+            
         }//fin barra
-        /**  Clase donde se le da tamaño al JFrame*/ 
+        
+    /**  Clase donde se le da tamaño al JFrame*/ 
     class WindowsEvents extends WindowAdapter{
+        
         @Override
+        /**Metodo que ajusta el tamaño de la ventana al fondo*/
         public void windowOpened(WindowEvent e) {
             Insets inset = getInsets();
             setSize(700+inset.left+inset.right,700+inset.bottom+inset.top); //Adecuar el tamaño de la ventana a abrir tomando en cuenta 
@@ -292,6 +302,7 @@ public class EscenarioJuego extends JFrame{
             setLocationRelativeTo(null); //Para centrar la ventana en la pantalla
         }
         @Override
+        /**Metodo que cierra la ventana*/
         public void windowClosing(WindowEvent e) {
             System.exit(0);
         }

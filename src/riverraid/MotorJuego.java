@@ -25,6 +25,7 @@ import javax.swing.Timer;
 import riverraid.EscenarioJuego.Fondo;
 import sun.swing.plaf.synth.SynthIcon;
 import sun.tools.jar.resources.jar;
+
 /** CLASE DONDE SE INICIA EL TIEMPO Y LOS MOVIMIENTOS DE LOS OBJETOS ASI COMO LAS COLICIONES*/
 public class MotorJuego extends EscenarioJuego{
     private JLabel vida,puntaje,gasolina;
@@ -52,7 +53,8 @@ public class MotorJuego extends EscenarioJuego{
      *
      */
     
-    /** Constructor de la clase se inician los elementos (vidas,gasolina,score.etc) */
+    
+    /** Constructor de la clase donde se inician los elementos (vidas,gasolina,score.etc) */
     public MotorJuego() {
         vidas=3;banB=0; G=1205;score=0;
         puntos=String.format("%05d", score);
@@ -83,12 +85,13 @@ public class MotorJuego extends EscenarioJuego{
         etiqueta.setForeground(Color.YELLOW);
         etiqueta.setFont(new Font("Tahoma",Font.BOLD,22));
     }
-    /**se recibe el nombre que el usuario ingresa*/
+    
+    /**Metodo que recibe el nombre que el usuario ingresa*/
     public void setNom(String nom){
         this.nombre= nom;
     }
     
-    /**metodo donde se reciben los obj(avion,enemigo, etc) */
+    /**Metodo donde se reciben los objetos (avion,enemigo, etc) */
     public void iniciar(Avion a,Fondo f,JLabel[] m,Enemigos[] e,Bordes[] b,Puente[] p,Frame frame,EscenarioJuego ejj){
     timerJuego =new Timer(80,new TimerJuego());
     timerJuego.start();
@@ -104,48 +107,58 @@ public class MotorJuego extends EscenarioJuego{
     
         
     }
-    /** retorna JLabel tiempo*/
+    
+    /** Metodo que retorna JLabel tiempo*/
     public JLabel getTiempo(){
     return tiempo;
     }
-    /** retorna JLabel etiqueta de tiempo*/
+    
+    /** Metodo que retorna JLabel etiqueta de tiempo*/
     public JLabel getEtiqueta(){
     return etiqueta;
     }
-    /** retorna JLabel puntos*/
+    
+    /** Metodo que retorna JLabel puntos*/
     public JLabel getPuntos(){
     return puntaje;
     }
-    /** retorna JLabel explocion*/
+    
+    /** Metodo que retorna JLabel explocion*/
     public JLabel getexp() {
         return exp;
     }
-    /** retorna JLabel vida*/
+    
+    /** Metodo que retorna JLabel vida*/
     public JLabel getVida() {
         return vida;
     }
-    /** retorna JLabel Gasolina*/
+    
+    /** Metodo que retorna JLabel Gasolina*/
     public JLabel getGas() {
         return gas;
     }
-    /** retorna JLabel medidor de gasolina*/
+    
+    /** Metodo que retorna JLabel medidor de gasolina*/
     public JLabel getGasolina() {
         return gasolina;
     }
-    /** cambia la velocidad del juego */
+    
+    /** etodo que cambia la velocidad del juego */
     public void setT(int T){
       timerJuego.setDelay(T);
-      
-      
     }
-    /**inicia el Tiempo */
+    
+    /**Metodo que inicia el tiempo */
     public void StartT(){
       timerJuego.start();
     }
+    
+    /**Metodo que detiene el tiempo */
     public void StopT(){
         timerJuego.stop();
     }
-    /**clase Timer implementa el action Listener  */
+    
+    /**Clase Timer que implementa action Listener para la animacion el juego*/
     class TimerJuego implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             t_sa++;/**contador para el momento en que el sonido del avion acabe*/        
